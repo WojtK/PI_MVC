@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edycja Produktu</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Edycja produktu <span style="color: #0029f5;">{{ produkt.nazwa }}</span></h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="edit_nazwa">Nazwa produktu: </label>
+        <input type="text" id="edit_nazwa" name="nazwa" value="{{ produkt.nazwa }}" required>
+        <label for="edit_kupiony">Kupiony:</label>
+        <input type="checkbox" id="edit_kupiony" name="kupiony" {% if produkt.kupiony %}checked{% endif %}>
+        <button type="submit">Zapisz</button>
+    </form>
+</div>
+</body>
+</html>

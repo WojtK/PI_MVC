@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Zakupów nr albumu 17221</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista Zakupów nr albumu 17221</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Dodaj produkt</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa produktu</th>
+                    <th>Kupiony</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produkt in produkty %}
+                    <tr class="{% if produkt.kupiony %}zakupiony{% endif %}">
+                        <td>{{ produkt.nazwa }}</td>
+                        <td>
+                            <input type="checkbox" {% if produkt.kupiony %}checked{% endif %} disabled>
+                        </td>
+                        <td>
+                            <button onclick="toggleEditForm({{ produkt.id }})">Edytuj</button>
+                            <form id="edit-form-{{ produkt.id }}" class="edit-form" method="get" action="{% url 'edycja_produktu' produkt.id %}">
+                            </form>
+                            <form method="post" action="{% url 'usuwanie_produktu' produkt.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleEditForm(productId) {
+            var form = document.getElementById('edit-form-' + productId);
+            form.submit();
+        }
+    </script>
+
+</body>
+</html>
