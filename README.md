@@ -1,23 +1,33 @@
+<H1>Zjazd 3</h1>
 <H1>SHOPPING_LIST</h1>
 
-Celem zadania było przygotowanie aplikacji MVC przedstawiającej listę zakupów​
+Celem zadania było przekształcenie aplikacji z zadania 2 tak aby:​
 
 Aplikacja powinna mieć możliwość:​
 
- - Wyświetlenie listy zakupów​
+ - Logike biznesową (CRUD) miała wystawiona w formie REST API​
 
- - Dodanie produktu listy​
+ - UI i frontend jako osobna aplikacja typu Single Page Application (React, Angular, Vue, JQuery)​
 
- - Edycji produktu – dodanie mechanizmu, checkboxa (kupiono, nie kupiono)​
+ - Wywołania  przez API używajac bibliotek typu fetch, axios lub podobnych.​
 
- - Usunięcie produktu z listy​
+Zadanie zrealizowano przy pomocy Django REST framework, który umożliwia wystawianie REST API
 
- - Dane powinny być zapisane w bazie danych​
+przykładowe zapytania do API:
+curl http://{IP}/api/produkty/ -> zwraca listę produktów
 
-Zadanie zrealizowano przy pomocy Django. Użyta baza danych sqlite3 (wbudowana w framework Django)
+curl http://{IP}/api/produkty/{ID} -> zwraca konkretny produkt
 
-Widok listy zakupów
-![img.png](img.png)
+curl -X DELETE http://{IP}/api/produkty/{ID} -> usuwa produkt o danym ID
 
-Ekran edycji
-![img_1.png](img_1.png)
+curl -d "nazwa=nowa nazwa&kupiony=true" -X PUT http://{IP}/api/produkty/{ID} -> modyfikuje produkt o danym ID
+
+![img_2.png](img_2.png)
+
+Ekran edycji produktu został przeniesiony na tę samą stronę co lista produktów i jest wywoływany przy pomocy "edytuj" (JQuery)
+
+Do interakcji z API użyto fetch
+
+![img_3.png](img_3.png)
+
+Kliknięcia przycisków generują wywołania API w celu wywołania konkretnej akcji. Miałem dylemat czy listę generować na podstawie danych zaciąganych z modelu, czy na podstawie danych otrzymanych poprzez zapytanie do API o listę produktów. Jednak w tym przypadku zastosowano drugą opcję.

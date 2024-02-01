@@ -56,6 +56,3 @@ button {
     border-radius: 3px;
     cursor: pointer;
 }
-.container table tbody tr.zakupiony td {
-    text-decoration: line-through;
-}
