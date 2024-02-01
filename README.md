@@ -24,7 +24,7 @@ curl -d "nazwa=nowa nazwa&kupiony=true" -X PUT http://{IP}/api/produkty/{ID} -> 
 
 ![img_2.png](img_2.png)
 
-Ekran edycji produktu został przeniesiony na tę samą stronę co lista produktów i jest wywoływany przy pomocy "edytuj" (JQuery)
+W celu przerobienia aplikacji na Single Page Application, ekran edycji produktu został przeniesiony na tę samą stronę co lista produktów i jest wywoływany przy pomocy "edytuj" (JQuery)
 
 Do interakcji z API użyto fetch
 
