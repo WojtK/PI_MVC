@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django_distill',
     'rest_framework',
     'SHOPPING_LIST',
+    'PI_MVC',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
