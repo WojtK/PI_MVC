@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Produkt
+from django.shortcuts import render, redirect
 from .forms import ProduktForm
-
+from rest_framework import viewsets
+from .models import Produkt
+from .serializers import ProduktSerializer
 
 def lista_zakupow(request):
     produkty = Produkt.objects.all()
@@ -17,21 +18,6 @@ def lista_zakupow(request):
     return render(request, 'PI_MVC/shopping_list.html', {'produkty': produkty, 'form': form})
 
 
-def usuwanie_produktu(request, produkt_id):
-    produkt = Produkt.objects.get(id=produkt_id)
-    produkt.delete()
-    return redirect('lista_zakupow')
-
-
-def edycja_produktu(request, produkt_id):
-    produkt = get_object_or_404(Produkt, id=produkt_id)
-
-    if request.method == 'POST':
-        form = ProduktForm(request.POST, instance=produkt)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_zakupow')
-    else:
-        form = ProduktForm(instance=produkt)
-
-    return render(request, 'PI_MVC/edit.html', {'form': form, 'produkt': produkt})
+class ProduktViewSet(viewsets.ModelViewSet):
+    queryset = Produkt.objects.all()
+    serializer_class = ProduktSerializer
