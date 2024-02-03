@@ -26,49 +26,27 @@
                     <th>Akcje</th>
                 </tr>
             </thead>
-            <tbody id="product-list">
-                <!-- Lista produktów generowana przez addEventListener -->
+            <tbody>
+                {% for produkt in produkty %}
+                        <td>
+                            <span id="nazwa-{{ produkt.id }}">{{ produkt.nazwa }}</span>
+                            <input type="text" id="edit_nazwa_{{ produkt.id }}" name="nazwa" value="{{ produkt.nazwa }}" style="display: none" required>
+                        </td>
+                        <td>
+                            <input type="checkbox" disabled="disabled" id="edit_kupiony_{{ produkt.id }}" name="kupiony" {% if produkt.kupiony %}checked{% endif %} style="display: inline">
+                        </td>
+                        <td>
+                            <button onclick="toggleEditForm({{ produkt.id }})">Edytuj</button>
+                            <button onclick="zapiszEdycje({{ produkt.id }})" style="display: none">Zapisz</button>
+                            <button onclick="usunProdukt({{ produkt.id }})">Usuń</button>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/produkty/')
-                .then(response => response.json())
-                .then(data => {
-                    const productList = document.getElementById('product-list');
-                    data.forEach(produkt => {
-                        const row = document.createElement('tr');
-                        row.classList.add(produkt.kupiony ? 'zakupiony' : null);
-
-                        const productNameCell = document.createElement('td');
-                        productNameCell.innerHTML = `
-                            <span id="nazwa-${produkt.id}">${produkt.nazwa}</span>
-                            <input type="text" id="edit_nazwa_${produkt.id}" name="nazwa" value="${produkt.nazwa}" style="display: none" required>
-                        `;
-                        row.appendChild(productNameCell);
-
-                        const purchasedCell = document.createElement('td');
-                        purchasedCell.innerHTML = `
-                            <input type="checkbox" disabled="disabled" id="edit_kupiony_${produkt.id}" name="kupiony" ${produkt.kupiony ? 'checked' : ''} style="display: inline">
-                        `;
-                        row.appendChild(purchasedCell);
-
-                        const actionsCell = document.createElement('td');
-                        actionsCell.innerHTML = `
-                            <button onclick="toggleEditForm(${produkt.id})">Edytuj</button>
-                            <button onclick="zapiszEdycje(${produkt.id})" style="display: none">Zapisz</button>
-                            <button onclick="usunProdukt(${produkt.id})">Usuń</button>
-                        `;
-                        row.appendChild(actionsCell);
-
-                        productList.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error:', error));
-        });
-
         function dodajProdukt() {
             var form = document.getElementById('add-form');
             var formData = new FormData(form);
