@@ -17,12 +17,13 @@ Including another URLconf
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from SHOPPING_LIST.views import lista_zakupow, ProduktViewSet
+from SHOPPING_LIST.views import ListaZakupowView, ProduktViewSet
+from django_distill import distill_path
 
 router = DefaultRouter()
 router.register(r'produkty', ProduktViewSet)
 
 urlpatterns = [
-    path('', lista_zakupow, name='lista_zakupow'),
+    distill_path('', ListaZakupowView.as_view(), name='lista_zakupow'),
     path('api/', include(router.urls))
 ]

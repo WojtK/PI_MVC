@@ -14,13 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django_distill import distill_path
 from rest_framework.routers import DefaultRouter
-from django.urls import path, include
-from .views import lista_zakupow, ProduktViewSet
+from .views import ProduktViewSet, ListaZakupowView
 
 router = DefaultRouter()
 router.register(r'produkty', ProduktViewSet)
 
 urlpatterns = [
-    path('', lista_zakupow, name='lista_zakupow'),
+    distill_path('', ListaZakupowView.as_view(), name='lista_zakupow', distill_file='shopping_list.html'),
 ]
