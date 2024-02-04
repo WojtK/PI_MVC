@@ -73,7 +73,7 @@
             var form = document.getElementById('add-form');
             var formData = new FormData(form);
 
-            fetch(`https://kuchyw1.atthost24.pl/api/produkty/`, {
+            fetch(`/kuchyw1.atthost24.pl/api/produkty/`, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -125,7 +125,7 @@
         }
 
         function usunProdukt(productId) {
-            fetch(`https://kuchyw1.atthost24.pl//api/produkty/${productId}/`, {
+            fetch(`/kuchyw1.atthost24.pl//api/produkty/${productId}/`, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
