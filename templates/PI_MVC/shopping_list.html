@@ -34,7 +34,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch(process.env.API_URL+'/api/produkty/')
+            let adres = process.env.API_URL +`/api/produkty/`
+            fetch(adres)
                 .then(response => response.json())
                 .then(data => {
                     const productList = document.getElementById('product-list');
@@ -73,7 +74,8 @@
             var form = document.getElementById('add-form');
             var formData = new FormData(form);
 
-            fetch(process.env.API_URL+'/api/produkty/', {
+            let adres = process.env.API_URL +`/api/produkty/`
+            fetch(adres, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -104,7 +106,8 @@
             var nowaNazwa = document.getElementById(`edit_nazwa_${productId}`).value;
             var nowyKupiony = document.getElementById(`edit_kupiony_${productId}`).checked;
 
-            fetch(process.env.API_URL+`/api/produkty/${productId}/`, {
+            let adres = process.env.API_URL +`/api/produkty/${productId}/`
+            fetch(adres, {
                 method: 'PUT',
                 body: JSON.stringify({
                     nazwa: nowaNazwa,
@@ -125,7 +128,8 @@
         }
 
         function usunProdukt(productId) {
-            fetch(process.env.API_URL+`/api/produkty/${productId}/`, {
+            let adres = process.env.API_URL +`/api/produkty/${productId}/`
+            fetch(adres, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
