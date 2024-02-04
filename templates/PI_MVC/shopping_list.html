@@ -34,7 +34,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            let adres = process.env.API_URL +`/api/produkty/`
+            let adres = `http://kuchyw1.atthost24.pl/api/produkty/`
             fetch(adres)
                 .then(response => response.json())
                 .then(data => {
@@ -74,7 +74,7 @@
             var form = document.getElementById('add-form');
             var formData = new FormData(form);
 
-            let adres = process.env.API_URL +`/api/produkty/`
+            let adres = `http://kuchyw1.atthost24.pl/api/produkty/`
             fetch(adres, {
                 method: 'POST',
                 body: formData,
@@ -106,7 +106,7 @@
             var nowaNazwa = document.getElementById(`edit_nazwa_${productId}`).value;
             var nowyKupiony = document.getElementById(`edit_kupiony_${productId}`).checked;
 
-            let adres = process.env.API_URL +`/api/produkty/${productId}/`
+            let adres = `http://kuchyw1.atthost24.pl/api/produkty/${productId}/`
             fetch(adres, {
                 method: 'PUT',
                 body: JSON.stringify({
@@ -128,7 +128,7 @@
         }
 
         function usunProdukt(productId) {
-            let adres = process.env.API_URL +`/api/produkty/${productId}/`
+            let adres = `http://kuchyw1.atthost24.pl/api/produkty/${productId}/`
             fetch(adres, {
                 method: 'DELETE',
                 headers: {
