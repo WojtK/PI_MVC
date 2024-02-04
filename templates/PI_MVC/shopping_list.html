@@ -76,9 +76,6 @@
             fetch(`/kuchyw1.atthost24.pl/api/produkty/`, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
-                },
             })
             .then(response => {
                 if (!response.ok) {
@@ -112,7 +109,6 @@
                 }),
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                 },
             })
             .then(response => {
@@ -127,9 +123,6 @@
         function usunProdukt(productId) {
             fetch(`/kuchyw1.atthost24.pl//api/produkty/${productId}/`, {
                 method: 'DELETE',
-                headers: {
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                },
             })
             .then(response => {
                 if (!response.ok) {
