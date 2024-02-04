@@ -1,33 +1,36 @@
-<H1>Zjazd 3</h1>
+<H1>Zjazd 4 i 5</h1>
 <H1>SHOPPING_LIST</h1>
 
-Celem zadania było przekształcenie aplikacji z zadania 2 tak aby:​
+Należy przekształcić aplikacje napisaną w zadaniu 2 tak aby można było ją uruchomić na cloudflare workers:​
 
-Aplikacja powinna mieć możliwość:​
+W ramach zadania udało się zdeployować na cloudflare statyczną stronę (widok) aplikacji. Bez backendu zrobionego w Django, nie udało mi się wrzucić.
 
- - Logike biznesową (CRUD) miała wystawiona w formie REST API​
+Zmiany w kodzie aplikacji:
+ - instalacja django-distill
+ - dostosowanie adresów url pod django-distill
 
- - UI i frontend jako osobna aplikacja typu Single Page Application (React, Angular, Vue, JQuery)​
+Przy pomocy django-distill i polecenia "echo yes | python manage.py distill-local public" generują się statyczne elementy aplikacji
 
- - Wywołania  przez API używajac bibliotek typu fetch, axios lub podobnych.​
+Repozytorium cloudflare zostało spięte z githubem. Opcja deploy przy każdym pushu do brancha została wyłączona.
 
-Zadanie zrealizowano przy pomocy Django REST framework, który umożliwia wystawianie REST API
+![img_8.png](img_8.png)
 
-przykładowe zapytania do API:
-curl http://{IP}/api/produkty/ -> zwraca listę produktów
+![img_6.png](img_6.png)
 
-curl http://{IP}/api/produkty/{ID} -> zwraca konkretny produkt
+![img_7.png](img_7.png)
 
-curl -X DELETE http://{IP}/api/produkty/{ID} -> usuwa produkt o danym ID
+![img_4.png](img_4.png)
 
-curl -d "nazwa=nowa nazwa&kupiony=true" -X PUT http://{IP}/api/produkty/{ID} -> modyfikuje produkt o danym ID
+Strona:
+![img_5.png](img_5.png)
 
-![img_2.png](img_2.png)
+Cache:
 
-W celu przerobienia aplikacji na Single Page Application, ekran edycji produktu został przeniesiony na tę samą stronę co lista produktów i jest wywoływany przy pomocy "edytuj" (JQuery)
+![img_9.png](img_9.png)
 
-Do interakcji z API użyto fetch
+Zmienna środowiskowa (link do API backendu na innej stronie, na której udało postawić się aplikację Django):
 
-![img_3.png](img_3.png)
+![img_10.png](img_10.png)
 
-Kliknięcia przycisków generują wywołania API w celu wywołania konkretnej akcji. Miałem dylemat czy listę generować na podstawie danych zaciąganych z modelu, czy na podstawie danych otrzymanych poprzez zapytanie do API o listę produktów. Jednak w tym przypadku zastosowano drugą opcję.
+
+

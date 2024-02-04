@@ -34,7 +34,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch(`/kuchyw1.atthost24.pl/api/produkty/`)
+            fetch(`/api/produkty/`)
                 .then(response => response.json())
                 .then(data => {
                     const productList = document.getElementById('product-list');
@@ -73,9 +73,12 @@
             var form = document.getElementById('add-form');
             var formData = new FormData(form);
 
-            fetch(`/kuchyw1.atthost24.pl/api/produkty/`, {
+            fetch(`/api/produkty/`, {
                 method: 'POST',
                 body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+                },
             })
             .then(response => {
                 if (!response.ok) {
@@ -101,7 +104,7 @@
             var nowaNazwa = document.getElementById(`edit_nazwa_${productId}`).value;
             var nowyKupiony = document.getElementById(`edit_kupiony_${productId}`).checked;
 
-            fetch(`/kuchyw1.atthost24.pl/api/produkty/${productId}/`, {
+            fetch(`api/produkty/${productId}/`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     nazwa: nowaNazwa,
@@ -109,6 +112,7 @@
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                 },
             })
             .then(response => {
@@ -121,8 +125,11 @@
         }
 
         function usunProdukt(productId) {
-            fetch(`/kuchyw1.atthost24.pl//api/produkty/${productId}/`, {
+            fetch(`/api/produkty/${productId}/`, {
                 method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
             })
             .then(response => {
                 if (!response.ok) {
